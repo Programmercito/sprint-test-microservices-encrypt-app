@@ -1,10 +1,12 @@
 package org.prueba.app.model.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Programmercito <devtecpro.org>
  */
-public class MessageEncrypt {
+public class MessageEncrypt implements Serializable{
 private String message;    
 
     /**
