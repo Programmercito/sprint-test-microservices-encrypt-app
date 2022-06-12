@@ -1,9 +1,11 @@
 package org.prueba.app.api.controllers;
 
 import javax.jms.Queue;
+import org.prueba.app.api.active.MessageProducer;
 import org.prueba.app.model.entities.MessageEncrypt;
 import org.prueba.app.model.entities.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsMessagingTemplate;
@@ -20,20 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api")
 public class ReceptorMessageController {
-
+    
     @Autowired
-    private JmsMessagingTemplate jmsMessagingTemplate;
-
-    @Autowired
-    private Queue queue;
-
+    MessageProducer messageProducer;
+    
+    @Value("${activemq.destination}")
+    private String destination;
+    
     @PostMapping(path = "/send", consumes = "application/json;charset=UTF-8", produces = "application/json")
     public Result insert(@RequestBody MessageEncrypt msg) {
         System.out.println(msg.getMessage());
-        this.jmsMessagingTemplate.convertAndSend(this.queue, msg);
-        System.out.println("message sent.");
+        messageProducer.sendTo(destination, msg);
         Result resul = new Result();
-
         resul.setResultado("Enviado");
         return resul;
     }

@@ -1,11 +1,13 @@
 package org.prueba.app.model.entities;
 
 import java.io.Serializable;
+import lombok.ToString;
 
 /**
  *
  * @author Programmercito <devtecpro.org>
  */
+@ToString
 public class MessageEncrypt implements Serializable{
 private String message;    
 
