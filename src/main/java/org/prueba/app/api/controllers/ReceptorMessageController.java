@@ -1,4 +1,4 @@
-package org.prueba.app.controllers;
+package org.prueba.app.api.controllers;
 
 import org.prueba.app.model.entities.MessageEncrypt;
 import org.prueba.app.model.entities.Result;
@@ -17,7 +17,7 @@ public class ReceptorMessageController {
 
     @PostMapping(path = "/send", consumes = "application/json;charset=UTF-8", produces = "application/json")
     public Result insert(@RequestBody MessageEncrypt msg) {
-        System.out.println(msg);
+        System.out.println(msg.getMessage());
         Result resul=new Result();
         resul.setResultado("Enviado");
         return resul;
