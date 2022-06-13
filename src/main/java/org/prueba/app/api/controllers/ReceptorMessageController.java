@@ -37,4 +37,5 @@ public class ReceptorMessageController {
         resul.setResultado("Enviado");
         return resul;
     }
+    
 }
